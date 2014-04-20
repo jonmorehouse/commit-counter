@@ -19,10 +19,11 @@ class MyAppDelegate
     item.length = NSVariableStatusItemLength
     item.setImage @img
     NSTimer.scheduledTimerWithTimeInterval(1.0, target:self, selector: :"handler:", userInfo:nil, repeats:true)
+    handler
 
   end
 
-  def handler(sender)
+  def handler(sender = nil)
 
     # generate today's file
     filename = Time.now.strftime("%a-%b-%d").downcase
