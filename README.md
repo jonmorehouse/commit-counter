@@ -8,5 +8,3 @@ This works by updating a system wide file on each commit. The timer then checks 
 I recommend using this [git-template](http://github.com/jonmorehouse/scripts) which has a pre-commit script which will automatically update a ~/.commits directory with the corresponding daily files.  
 
 
-
-
