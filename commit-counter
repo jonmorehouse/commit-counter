@@ -7,18 +7,17 @@ class MyAppDelegate
   def initialize
 
     @base_dir = File.expand_path "~/.commits"
+    @img = NSImage.new.initWithContentsOfFile File.join File.dirname(__FILE__), "icon.png"
     
   end
 
   def applicationDidFinishLaunching(notification)
 
-    menu = NSMenu.new
-    menu.initWithTitle "Commit Counter"
-
     statusBar = NSStatusBar.systemStatusBar
     @item = item = statusBar._statusItemWithLength(0, withPriority:2137483647)
     item.length = 0
     item.length = NSVariableStatusItemLength
+    item.setImage @img
     NSTimer.scheduledTimerWithTimeInterval(1.0, target:self, selector: :"handler:", userInfo:nil, repeats:true)
 
   end
@@ -37,12 +36,8 @@ class MyAppDelegate
     count = %x{wc -l #{path}}.split.first.to_i
 
     # now count the number of lines in file
-    @item.title = count
-
-
-
+    @item.setTitle "#{count.to_s}"
   end
-
 end
 
 app = NSApplication.sharedApplication
