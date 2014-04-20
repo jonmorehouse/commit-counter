@@ -19,7 +19,13 @@ git config --global init.templatedir '~/.git-template'
 
 # re-init repositories
 git init
+
+# now start daemon
+git clone http://github.com/jonmorehouse/commit-counter
+nohup commit-counter/commit-counter >/dev/null 2>&1&
 ```
+
+
 
 Screenshot
 ----------
