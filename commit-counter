@@ -39,7 +39,7 @@ class MyAppDelegate
     # read all lines of file
     count = %x{wc -l #{path}}.split.first.to_i
     if @repo_grep
-      repo_count = %x{cat #{path} | grep #{@repo_grep} | wc -l}
+      repo_count = %x{cat #{path} | grep #{@repo_grep} | wc -l}.split.first.to_i
       message = "#{count.to_s}:#{repo_count.to_s}"
     else
       message = "#{count.to_s}"
@@ -53,4 +53,3 @@ end
 app = NSApplication.sharedApplication
 app.delegate = MyAppDelegate.new ARGV.first
 app.run
-
