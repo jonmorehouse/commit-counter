@@ -4,8 +4,11 @@ framework 'Cocoa'
 
 class MyAppDelegate
 
-  def initialize
+  def initialize(repo_grep)
 
+    if repo_grep
+      @repo_grep = repo_grep
+    end
     @base_dir = File.expand_path "~/.commits"
     @img = NSImage.new.initWithContentsOfFile File.join File.dirname(__FILE__), "icon.png"
     
@@ -33,14 +36,21 @@ class MyAppDelegate
       @item.update 0
     end
 
-    # read lines of file
+    # read all lines of file
     count = %x{wc -l #{path}}.split.first.to_i
+    if @repo_grep
+      repo_count = %x{cat #{path} | grep #{@repo_grep} | wc -l}
+      message = "#{count.to_s}:#{repo_count.to_s}"
+    else
+      message = "#{count.to_s}"
+    end
 
     # now count the number of lines in file
-    @item.setTitle "#{count.to_s}"
+    @item.setTitle "#{message}"
   end
 end
 
 app = NSApplication.sharedApplication
-app.delegate = MyAppDelegate.new
+app.delegate = MyAppDelegate.new ARGV.first
 app.run
+
