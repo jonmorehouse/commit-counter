@@ -33,7 +33,8 @@ class MyAppDelegate
     path = File.join @base_dir, filename
 
     if not File.exist? path
-      @item.update 0
+      @item.setTitle "0"
+      return
     end
 
     # read all lines of file
