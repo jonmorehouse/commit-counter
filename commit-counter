@@ -29,7 +29,7 @@ class MyAppDelegate
   def handler(sender = nil)
 
     # generate today's file
-    filename = Time.now.strftime("%a-%b-%d").downcase
+    filename = Time.now.strftime("%a-%b-%e").sub!(" ", "").downcase
     path = File.join @base_dir, filename
 
     if not File.exist? path
